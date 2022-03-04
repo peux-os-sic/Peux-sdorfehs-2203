@@ -1,0 +1,1 @@
+This will copy the Peux OS Sdorfehs 22.03 configurations to your system's "/tmp/Peux-sdorfehs-2203" directory. You may then copy the respective configuration from this directory over to your Home directory.  The repository can be found at https://github.com/peux-os-sic/Peux-sdorfehs-2203.

@@ -1,0 +1,149 @@
+############################################################################################
+
+## --- Author of Sdorfehs is Joshua Stein ---
+
+## Sdorfehs [starfish] is an enhanced successor of RatPoison.
+
+## This is the Sdorfehs WM configuration for Peux OS. This is mostly
+## identical to the Peux OS RatPoison's configuration, by DN-debug.
+
+## Feel free to tweak and share.
+
+############################################################################################
+
+
+############################################################################################
+#### REMOVE THIS SECTION TO STOP THE WELCOME APP ON STARTUP ####
+exec bash /usr/local/bin/welcomeapp
+
+
+#### REMOVE THIS SECTION AFTER INSTALLATION ####
+bind C-c exec sudo calamares
+############################################################################################
+
+
+# setting the escape key to the Windows key
+escape Super_L
+
+# bar
+exec bash ~/.config/sdorfehs/scripts/myBar
+
+# compositor
+#exec xcompmgr -c -f -D 5 &
+exec picom -b --config ~/.config/picom/picom.conf --experimental-backends
+
+# set pointer
+exec xsetroot -cursor_name left_ptr
+
+# window customs
+set barpadding 20 10
+set gap 15
+set ignoreresizehints 1
+set onlyborder 0
+
+# bar toggle
+bind T exec bash $HOME/.config/system_scripts/sdorfehs_toggle_bar &
+
+# polybar
+unmanage panel
+exec bash $HOME/.config/polybar/launch.sh
+
+# auto-lock
+exec xautolock -time 5 -locker ~/.config/system_scripts/session_lock &
+
+# manual lock
+bind L exec bash $HOME/.config/system_scripts/session_lock
+
+# background
+exec bash $HOME/.config/system_scripts/pkill_bc &
+
+# audio
+alias playpause exec volume pause
+alias aprev exec volume previous
+alias anext exec volume next
+alias amute exec volume mute
+alias raiseVol exec volume up
+alias lowVol exec volume down
+
+
+definekey top XF86AudioPlay playpause
+definekey top XF86AudioPrev aprev
+definekey top XF86AudioNext anext
+definekey top XF86AudioMute amute
+definekey top XF86AudioRaiseVolume raiseVol
+definekey top XF86AudioLowerVolume lowVol
+
+# brightness
+alias bup exec brightness up
+alias bdown exec brightness down
+
+definekey top XF86MonBrightnessUp bup
+definekey top XF86MonBrightnessDown bdown
+
+# launch_apps
+bind f exec firefox
+bind b exec bluemail
+bind t exec alacritty
+bind h exec pcmanfm-qt
+
+# rofi launcher
+bind d exec rofi -no-lazy-grab -show drun -modi drun -theme ~/.config/rofi/rat_rofi.rasi
+
+# rofi current window list using mod w OR C-w
+bind w windows
+
+unbind C-w
+alias rofi exec rofi -no-lazy-grab -show window -modi window -theme ~/.config/rofi/rat_rofi.rasi
+definekey top C-w rofi
+
+# prevent accidental closes
+unbind k
+
+# restart Sdorfehs
+bind q restart
+
+# quit Sdorfehs
+bind e quit
+
+
+# swap workspaces
+definekey top M-1 vselect 0
+definekey top M-2 vselect 1
+definekey top M-3 vselect 2
+definekey top M-4 vselect 3
+
+# move current window to another workspace
+definekey top C-1  vmove 0
+definekey top C-2  vmove 1
+definekey top C-3  vmove 2
+definekey top C-4  vmove 3
+
+# Power Options
+alias reb exec systemctl reboot
+alias pow exec systemctl poweroff
+alias hib exec systemctl hibernate
+alias sus exec systemctl suspend
+
+definekey top C-M-r reb
+definekey top C-M-p pow
+definekey top C-M-h hib
+definekey top C-M-s sus
+
+# i like tab just going between the same two windows
+bind Tab focuslast
+bind grave focus
+
+# act normal but prevent firefox raising itself when links are opened from
+# other apps
+#set rudeness 12
+
+# let popups stay centered
+unmanage xmessage
+unmanage xprompt
+
+# date and time
+bind c exec gsimplecal
+
+# screenshot
+alias sshot exec scrot ~/Pictures/scrot_sdorfehs-`date +%F`.png
+bind Print sshot

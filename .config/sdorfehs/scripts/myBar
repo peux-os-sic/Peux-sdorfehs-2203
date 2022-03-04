@@ -1,0 +1,31 @@
+#/bin/bash
+
+set -eu
+while :
+do
+
+   # Workspace 
+    AWS="$(xprop -root '\t$0' _NET_CURRENT_DESKTOP | cut -f 2)"
+    WS="^fg(lightblue)Workspace $(expr \( $AWS + 1 \))" 
+    NWS="$(xprop -root '\t$0' _NET_NUMBER_OF_DESKTOPS | cut -f 2)"
+
+    # Updates
+	updates="^fg(red)$(bash ~/.config/sdorfehs/scripts/updates)"
+
+    # Volume
+    custVol="^fg(lightgreen)Vol($(bash ~/.config/sdorfehs/scripts/volume-status))"
+
+    # Date
+    D="^fg(yellow)$(date '+%a %d %b %I:%M')"
+
+    # Brightness
+    # Enable manually on laptop type devices
+    
+    # custBright="Brightness($(light -G))"
+
+    # Print date and workspace in this case
+    # only using the number for current desktop
+    echo  "$updates $custVol $D $WS" > ~/.config/sdorfehs/bar
+    sleep 1
+
+done

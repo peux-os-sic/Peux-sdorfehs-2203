@@ -1,0 +1,11 @@
+#!/bin/bash
+
+updates=`checkupdates | wc -l`
+
+if [[ $(checkupdates | wc -l) != 0 ]]
+then
+    echo "$updates Update(s)"
+    #notify-send "$updates Update(s) are available"
+else
+    echo ""
+fi
